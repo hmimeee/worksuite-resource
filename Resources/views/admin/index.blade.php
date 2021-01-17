@@ -204,7 +204,7 @@ p
                     @forelse($resources as $resource)
                     <div class="tile form">
                         <i class="fa {{ $icons[$resource->ext] ?? 'fa-file' }}"></i>
-                        <h3>{{ $resource->name }}</h3>
+                        {{-- <h3>{{ $resource->name }}</h3> --}}
                         <p>{{ $resource->details ?? '...' }}</p>
                         <p><a href="{{ route('admin.resources.show', $resource->id) }}">Download</a>
                             @if(auth()->user()->hasRole('admin'))| <a id="deleteFile" href="{{ route('admin.resources.delete', $resource->id) }}">Delete</a> @endif

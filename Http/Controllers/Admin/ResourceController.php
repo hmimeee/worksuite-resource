@@ -44,7 +44,7 @@ class ResourceController extends AdminBaseController
     public function store(Request $request)
     {
         //Allowed file type
-        $allowedFiles = ['pdf', 'docx', 'svg', 'jpg', 'jpeg', 'png', 'gif', 'mp4', 'txt', 'xlsx', 'xls', 'doc', 'ppt', 'zip'];
+        $allowedFiles = ['pdf', 'docx', 'svg', 'jpg', 'jpeg', 'png', 'gif', 'mp4', 'txt', 'xlsx', 'xls', 'doc', 'ppt', 'zip', 'psd', 'ai', 'eps'];
         $hasDisallowed = false;
 
         foreach ($request->allFiles() as $key => $file) {

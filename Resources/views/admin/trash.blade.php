@@ -58,7 +58,7 @@
                     @forelse($resources as $resource)
                     <div class="tile form">
                         <i class="fa {{ $icons[$resource->ext] ?? 'fa-file' }}"></i>
-                        <h3>{{ $resource->name }}</h3>
+                        {{-- <h3>{{ $resource->name }}</h3> --}}
                         <p>{{ $resource->details ?? '...' }}</p>
                         <p>
                             @if(auth()->user()->hasRole('admin'))
