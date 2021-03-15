@@ -12,7 +12,7 @@
 */
 
 //Admin panel routes
-Route::group(['prefix' => 'admin/kpi', 'as' => 'admin.'], function () {
+Route::group(['prefix' => 'admin/kpi', 'as' => 'admin.', 'middleware' => ['auth', 'role:admin']], function () {
     Route::delete('resources/{resource}/delete', 'Admin\ResourceController@delete')->name('resources.delete');
     Route::put('resources/{resource}/restore', 'Admin\ResourceController@restore')->name('resources.restore');
     Route::get('resources/trash', 'Admin\ResourceController@trash')->name('resources.trash');
@@ -20,7 +20,7 @@ Route::group(['prefix' => 'admin/kpi', 'as' => 'admin.'], function () {
 });
 
 //Member panel routes
-Route::group(['prefix' => 'member/kpi', 'as' => 'member.'], function () {
+Route::group(['prefix' => 'member/kpi', 'as' => 'member.', 'middleware' => ['auth']], function () {
     Route::delete('resources/{resource}/delete', 'Member\ResourceController@delete')->name('resources.delete');
     Route::put('resources/{resource}/restore', 'Member\ResourceController@restore')->name('resources.restore');
     Route::get('resources/trash', 'Member\ResourceController@trash')->name('resources.trash');

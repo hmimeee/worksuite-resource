@@ -156,13 +156,14 @@ p
 <div class="row">
     <div class="col-md-12">
         <div class="white-box">
+            @if(auth()->user()->hasRole('admin'))
             <div class="container">
                 <div class="row it">
                     <div class="col-sm-offset-1 col-sm-10" id="one">
                         <form id="uploadDoc-form" action="{{ route('member.resources.store') }}">
                             @csrf
                             <div id="uploader">
-                                <p class="text-muted">Allowed files: pdf, docx, svg, jpg, jpeg, png, gif, mp4, txt, xlsx, xls, doc, ppt, zip</p>
+                                <p class="text-muted">Allowed files: pdf, docx, svg, jpg, jpeg, png, gif, mp4, txt, xlsx, xls, doc, ppt, zip, psd, ai, eps</p>
                                 <div class="row uploadDoc">
                                     <div class="col-sm-3">
                                         <div class="docErr">Please upload valid file</div>
@@ -194,6 +195,7 @@ p
                     <!--one-->
                 </div><!-- row -->
             </div><!-- container -->
+            @endif
         </div>
     </div>
 
@@ -204,7 +206,7 @@ p
                     @forelse($resources as $resource)
                     <div class="tile form">
                         <i class="fa {{ $icons[$resource->ext] ?? 'fa-file' }}"></i>
-                        <h3>{{ $resource->name }}</h3>
+                        {{-- <h3>{{ $resource->name }}</h3> --}}
                         <p>{{ $resource->details ?? '...' }}</p>
                         <p><a href="{{ route('member.resources.show', $resource->id) }}">Download</a>
                             @if(auth()->user()->hasRole('admin'))| <a id="deleteFile" href="{{ route('member.resources.delete', $resource->id) }}">Delete</a> @endif
@@ -268,7 +270,7 @@ p
         })
     });
 
-    var fileTypes = ['pdf', 'docx', 'svg', 'jpg', 'jpeg', 'png', 'gif', 'mp4', 'txt', 'xlsx', 'xls', 'doc', 'ppt', 'zip']; //acceptable file types
+    var fileTypes = ['pdf', 'docx', 'svg', 'jpg', 'jpeg', 'png', 'gif', 'mp4', 'txt', 'xlsx', 'xls', 'doc', 'ppt', 'zip', 'psd', 'ai', 'eps']; //acceptable file types
     function readURL(input) {
         if (input.files && input.files[0]) {
             var extension = input.files[0].name.split('.').pop().toLowerCase(), //file extension from input file
@@ -303,6 +305,12 @@ p
                         $(input).closest('.fileUpload').find(".icon").attr('src', 'https://www.flaticon.com/svg/static/icons/svg/337/337960.svg');
                     } else if (extension == 'ppt') {
                         $(input).closest('.fileUpload').find(".icon").attr('src', 'https://www.flaticon.com/svg/static/icons/svg/337/337949.svg');
+                    } else if (extension == 'psd') {
+                        $(input).closest('.fileUpload').find(".icon").attr('src', 'https://www.flaticon.com/svg/static/icons/svg/167/167525.svg');
+                    } else if (extension == 'ai') {
+                        $(input).closest('.fileUpload').find(".icon").attr('src', 'https://www.flaticon.com/svg/static/icons/svg/688/688064.svg');
+                    } else if (extension == 'eps') {
+                        $(input).closest('.fileUpload').find(".icon").attr('src', 'https://www.flaticon.com/svg/static/icons/svg/337/337933.svg');
                     } else {
                         $(input).closest('.uploadDoc').find(".docErr").slideUp('slow');
                     }
